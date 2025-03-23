@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Insurance Prediction</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Vehicle Insurance Prediction</h1>
+            <p class="subtitle">Enter vehicle and customer details to predict insurance interest</p>
+        </div>
+
+        {% if context and context != "Rendering" %}
+        <div class="result">
+            <h2>Prediction Result</h2>
+            <p>The customer is 
+                {% if context == "Response-Yes" %}
+                <span class="result-yes">likely to be interested</span>
+                {% else %}
+                <span class="result-no">not likely to be interested</span>
+                {% endif %}
+                in vehicle insurance.
+            </p>
+        </div>
+        {% endif %}
+
+        <form method="post">
+            <div class="row">
+                <div class="col form-group">
+                    <label for="Gender">Gender</label>
+                    <select id="Gender" name="Gender" required>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+                <div class="col form-group">
+                    <label for="Age">Age</label>
+                    <input type="number" id="Age" name="Age" min="18" max="100" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label for="Driving_License">Driving License</label>
+                    <select id="Driving_License" name="Driving_License" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="col form-group">
+                    <label for="Region_Code">Region Code</label>
+                    <input type="number" id="Region_Code" name="Region_Code" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label for="Previously_Insured">Previously Insured</label>
+                    <select id="Previously_Insured" name="Previously_Insured" required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="col form-group">
+                    <label for="Annual_Premium">Annual Premium</label>
+                    <input type="number" id="Annual_Premium" name="Annual_Premium" step="0.01" required>
+                    <p class="small-hint">Amount in currency</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label for="Policy_Sales_Channel">Policy Sales Channel</label>
+                    <input type="number" id="Policy_Sales_Channel" name="Policy_Sales_Channel" step="0.01" required>
+                </div>
+                <div class="col form-group">
+                    <label for="Vintage">Vintage</label>
+                    <input type="number" id="Vintage" name="Vintage" required>
+                    <p class="small-hint">Customer relationship duration in days</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Vehicle Age</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="vehicle_age_lt_1" name="vehicle_age_radio" value="lt_1" onclick="updateVehicleAge('lt_1')">
+                        <label for="vehicle_age_lt_1" class="radio-label">Less than 1 Year</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="vehicle_age_1_2" name="vehicle_age_radio" value="1_2" onclick="updateVehicleAge('1_2')">
+                        <label for="vehicle_age_1_2" class="radio-label">1-2 Years</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="vehicle_age_gt_2" name="vehicle_age_radio" value="gt_2" onclick="updateVehicleAge('gt_2')">
+                        <label for="vehicle_age_gt_2" class="radio-label">More than 2 Years</label>
+                    </div>
+                </div>
+                <!-- Hidden inputs to ensure values are submitted -->
+                <input type="hidden" id="Vehicle_Age_lt_1_Year" name="Vehicle_Age_lt_1_Year" value="0">
+                <input type="hidden" id="Vehicle_Age_gt_2_Years" name="Vehicle_Age_gt_2_Years" value="0">
+            </div>
+
+            <div class="form-group">
+                <label for="Vehicle_Damage_Yes">Vehicle Damage History</label>
+                <select id="Vehicle_Damage_Yes" name="Vehicle_Damage_Yes" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-button">Predict Insurance Interest</button>
+        </form>
+
+        <a href="/train"><button class="train-button">Train Model</button></a>
+    </div>
+
+    <script>
+        function updateVehicleAge(value) {
+            // Reset all values
+            document.getElementById('Vehicle_Age_lt_1_Year').value = '0';
+            document.getElementById('Vehicle_Age_gt_2_Years').value = '0';
+            
+            // Set appropriate value based on selection
+            if (value === 'lt_1') {
+                document.getElementById('Vehicle_Age_lt_1_Year').value = '1';
+            } else if (value === 'gt_2') {
+                document.getElementById('Vehicle_Age_gt_2_Years').value = '1';
+            }
+            // For 1-2 years, both values remain 0
+        }
+    </script>
+</body>
+</html>
