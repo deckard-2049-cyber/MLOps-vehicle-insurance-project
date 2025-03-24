@@ -4,6 +4,7 @@ Data Ingestion → Data Validation → Data Transformation → Model Training �
 Since, our project is a small project, we are using Pipeline-Based Architecture (Sequential) as system design approach. But for a bigger project, we should use DAG-Based Architecture (Orchestration), which uses Airflow, Kubeflow, or Prefect, allows parallel execution and better workflow control. Example: Kubeflow Pipelines.
 
 
+
 Tools and Techniques used:- 
 
 - MongoDB - Database
