@@ -65,6 +65,7 @@ Components:-
 
 
 ----------------------------- logging, exception and notebooks -----------------------------
+
 14. Write the logger file and test it on demo.py
 15. Write the exception file and test it on demo.py
 16. EDA and Feature Engg notebook added.
