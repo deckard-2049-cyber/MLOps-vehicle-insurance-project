@@ -84,7 +84,7 @@ Components:-
 18. To setup the connection url on mac(also work for windows), open bash/powershell terminal and run below command:
 
                         *** For Bash ***
-    set: export MONGODB_URL="mongodb+srv://deckard2049cyber:69191Agam@cluster0.4spj2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    set: export MONGODB_URL="mongodb+srv://<login_id>:<password>@cluster0....."
     check: echo $MONGODB_URL
 
                         *** For Powershell ***
